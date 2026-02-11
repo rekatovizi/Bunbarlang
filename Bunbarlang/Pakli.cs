@@ -28,12 +28,14 @@ namespace Bunbarlang
                 }
             }
         }
-
+        
         public Kartya Huzas() 
         { 
             Random rnd = new Random();
-            int index = rnd.Next(kartyak.Count);
+            int index = rnd.Next(kartyak.Count());
+            Console.WriteLine(index);
             Kartya huzottKartya = kartyak[index];
+            Console.WriteLine(huzottKartya);
             kartyak.RemoveAt(index);
             return huzottKartya;
         }

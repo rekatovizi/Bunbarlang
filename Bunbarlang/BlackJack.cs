@@ -40,7 +40,7 @@ namespace Bunbarlang
             }
             Console.WriteLine("\nOszto kártyái:\n");
             Console.WriteLine(osztoKartyak[0]+"\n?");
-            Console.WriteLine(Kor()); 
+            Console.WriteLine(Kor());
         }
 
         public string Kor()
@@ -48,6 +48,7 @@ namespace Bunbarlang
             Kartya pl = new Kartya(Szin.TREFF, Figura.ASZ);
             int Ossz = 0;
             int OsztoOssz = 0;
+            string valasz = "";
             foreach (var kartya in jatekosKartyak)
             {
                 Ossz += FiguraErtek(kartya);
@@ -65,7 +66,9 @@ namespace Bunbarlang
                     AszVan(OsztoOssz);
                 }
             }
-            
+
+            Kiiratas(Ossz, OsztoOssz);
+
             if (Ossz == 21)
             {
                 if (OsztoOssz == 21)
@@ -88,24 +91,30 @@ namespace Bunbarlang
                 penz += 2*tet;
                 return "Nyertél, az osztó túllépte a 21-et!";   
             }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"A kártyáid értéke {Ossz}.");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Az osztó kártyáinak értéke {OsztoOssz}");
-            Console.ResetColor();
-            Console.WriteLine("Szeretnél húzni? (i/n)");
-            string valasz = Console.ReadLine();
+            
+            
             do
             {
-                if (valasz == "i")
+                Console.WriteLine("Szeretnél húzni? (i/n)");
+                valasz = Console.ReadLine();
+            } while (valasz != "n" && valasz != "i");
+            
+            if (valasz == "i")
+            {
+                jatekosKartyak.Add(pakli.Huzas());
+                
+                if (Ossz > 21)
                 {
-                    jatekosKartyak.Add(pakli.Huzas());
-                    if (OsztoOssz < 17)
-                    {
-                        osztoKartyak.Add(pakli.Huzas());
-                    }
+                    penz -= tet;
+                    Kiiratas(Ossz, OsztoOssz);
+                    return "Vesztettél!";
                 }
-            } while (valasz != "n");
+                else if (OsztoOssz < 17)
+                {
+                    osztoKartyak.Add(pakli.Huzas());
+                }
+            }
+
             
             if (valasz == "n")
             {
@@ -123,7 +132,26 @@ namespace Bunbarlang
                         }
                     }
                 }
-               
+                Kiiratas(Ossz, OsztoOssz);
+                if (OsztoOssz > 21)
+                {
+                    penz += 2 * tet;
+                    return "Nyertél, az osztó túllépte a 21-et!";
+                }
+                else if (OsztoOssz > Ossz)
+                {
+                    penz -= tet;
+                    return "Vesztettél!";
+                }
+                else if (OsztoOssz < Ossz)
+                {
+                    penz += 2 * tet;
+                    return "Nyertél!";
+                }
+                else
+                {
+                    return "Döntetlen!";
+                }
             }
             
             Console.WriteLine("A játékos lapjai:\n");
@@ -160,6 +188,15 @@ namespace Bunbarlang
                 ertek = Convert.ToInt32(k.Figuraja);
             }
             return ertek;
+        }
+
+        private void Kiiratas(int ossz, int oszto)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"A kártyáid értéke {ossz}.");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Az osztó kártyáinak értéke {oszto}");
+            Console.ResetColor();
         }
 
         public override string ToString()
