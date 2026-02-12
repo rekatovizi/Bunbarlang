@@ -39,6 +39,12 @@ namespace Bunbarlang
                     Console.ResetColor();
                     Console.Write("Mennyi tétet szeretnél feltenni: ");
                     this.tet = Convert.ToInt32(Console.ReadLine());
+                    if (this.tet <= 0 || this.tet > this.penz)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Hibás tét! Kérem adjon meg egy helyes értéket!");
+                        Console.ResetColor();
+                    }
                 } while (this.tet <= 0 || this.tet > this.penz);
                 this.ujjatekvalaszto = "";
                 pakli.Feltoltes();

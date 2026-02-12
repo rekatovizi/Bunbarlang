@@ -6,10 +6,10 @@
         {
             //BlackJack game = new BlackJack(1000, 100);
             //game.Jatek();
-            //LoversenyOOP loverseny = new LoversenyOOP(100, 200, 10);
-            //loverseny.Jatek();
-            Slot slot = new Slot();
-            slot.Jatek();
+            LoversenyOOP loverseny = new LoversenyOOP(100, 1000);
+            loverseny.Jatek();
+            //Slot slot = new Slot();
+            //slot.Jatek();
         }
     }
 }

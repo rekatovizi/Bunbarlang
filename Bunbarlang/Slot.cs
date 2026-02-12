@@ -35,21 +35,18 @@ namespace Bunbarlang
             {
                 do
                 {
-                    if (this.tet == 0)
-                    {
-                        Console.WriteLine($"Jelenlegi pénzed: {this.penz}");
-                        Console.Write("Mennyi tétet szeretnél feltenni: ");
-
-                    }
-                    else
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"Jelenlegi pénzed: {this.penz}");
+                    Console.ResetColor();
+                    Console.Write("Mennyi tétet szeretnél feltenni: ");
+                    this.tet = Convert.ToInt32(Console.ReadLine());
+                    if (this.tet <= 0 || this.tet > this.penz)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("Érvénytelen összeget adtál meg, kérlek adj meg hivatalos összeget: ");
+                        Console.WriteLine("Hibás tét! Kérem adjon meg egy helyes értéket!");
                         Console.ResetColor();
                     }
-                    this.tet = Convert.ToInt32(Console.ReadLine());
-                }
-                while (this.tet < 0 || this.tet > penz);
+                } while (this.tet <= 0 || this.tet > this.penz);
 
                 Random rnd = new Random();
 
