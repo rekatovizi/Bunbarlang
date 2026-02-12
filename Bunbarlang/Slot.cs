@@ -58,6 +58,7 @@ namespace Bunbarlang
                 {
                     this.tomb[i] = szimbolumok[rnd.Next(0, szimbolumok.Count)];
                 }
+
                 int szamoloa = 0;
                 int szamolob = 0;
                 int szamoloc = 0;
@@ -72,8 +73,36 @@ namespace Bunbarlang
                     {
                         szamoloa++;
                     }
+                    else if (item == "B")
+                    {
+                        szamolob++;
+                    }
+                    else if (item == "C")
+                    {
+                        szamoloc++;
+                    }
+                    else if (item == "D") 
+                    {
+                        szamolod++; 
+                    } 
+                    else if (item == "E") 
+                    {
+                        szamoloe++; 
+                    } 
+                    else if (item == "G") 
+                    { 
+                        szamolog++; 
+                    } 
+                    else if (item == "O") 
+                    { 
+                        szamoloo++; 
+                    } 
+                    else if (item == "M") 
+                    { 
+                        szamolom++; 
+                    }
                 }
-                if (szamoloa > 3)
+                if (szamoloa > 3 || szamolob > 3 || szamoloc > 3 || szamolod > 3 || szamoloe > 3 || szamolog > 3 || szamoloo > 3 || szamolom > 3)
                 {
                     Kiiratas();
                     Console.ForegroundColor= ConsoleColor.Cyan;
@@ -81,111 +110,8 @@ namespace Bunbarlang
                     Console.ResetColor();
                     this.penz += 2 * this.tet;
                 }
-                foreach (var item in this.tomb)
-                {
-                    if (item == "B")
-                    {
-                        szamolob++;
-                    }
-                }
-                if (szamolob > 3)
-                {
-                    Kiiratas();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("Gratulálok, megnyerted a téted kétszeresét!");
-                    Console.ResetColor();
-                    this.penz += 2 * this.tet;
-                }
-                foreach (var item in this.tomb)
-                {
-                    if (item == "C")
-                    {
-                        szamoloc++;
-                    }
-                }
-                if (szamoloc > 3)
-                {
-                    Kiiratas();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("Gratulálok, megnyerted a téted kétszeresét!");
-                    Console.ResetColor();
-                    this.penz += 2 * this.tet;
-                }
-                foreach (var item in this.tomb)
-                {
-                    if (item == "D")
-                    {
-                        szamolod++;
-                    }
-                }
-                if (szamolod > 3)
-                {
-                    Kiiratas();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("Gratulálok, megnyerted a téted kétszeresét!");
-                    Console.ResetColor();
-                    this.penz += 2 * this.tet;
-                }
-                foreach (var item in this.tomb)
-                {
-                    if (item == "E")
-                    {
-                        szamoloe++;
-                    }
-                }
-                if (szamoloe > 3)
-                {
-                    Kiiratas();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("Gratulálok, megnyerted a téted kétszeresét!");
-                    Console.ResetColor();
-                    this.penz += 2 * this.tet;
-                }
-                foreach (var item in this.tomb)
-                {
-                    if (item == "G")
-                    {
-                        szamolog++;
-                    }
-                }
-                if (szamolog > 3)
-                {
-                    Kiiratas();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("Gratulálok, megnyerted a téted kétszeresét!");
-                    Console.ResetColor();
-                    this.penz += 2 * this.tet;
-                }
-                foreach (var item in this.tomb)
-                {
-                    if (item == "O")
-                    {
-                        szamoloo++;
-                    }
-                }
-                if (szamoloo > 3)
-                {
-                    Kiiratas();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("Gratulálok, megnyerted a téted kétszeresét!");
-                    Console.ResetColor();
-                    this.penz += 2 * this.tet;
-                }
-                foreach (var item in this.tomb)
-                {
-                    if (item == "M")
-                    {
-                        szamolom++;
-                    }
-                }
-                if (szamolom > 3)
-                {
-                    Kiiratas();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("Gratulálok, megnyerted a téted kétszeresét!");
-                    Console.ResetColor();
-                    this.penz += 2 * this.tet;
-                }
+                
+                
                 if (this.tomb[0] == "G" && this.tomb[1] == "O" && this.tomb[2] == "B" && this.tomb[3] == "M" && this.tomb[4] == "A")
                 {
                     Kiiratas();
