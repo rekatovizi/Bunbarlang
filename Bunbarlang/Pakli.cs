@@ -33,9 +33,9 @@ namespace Bunbarlang
         { 
             Random rnd = new Random();
             int index = rnd.Next(kartyak.Count());
-            Console.WriteLine(index);
+            //Console.WriteLine(index);
             Kartya huzottKartya = kartyak[index];
-            Console.WriteLine(huzottKartya);
+            //Console.WriteLine(huzottKartya);
             kartyak.RemoveAt(index);
             return huzottKartya;
         }

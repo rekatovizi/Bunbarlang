@@ -225,13 +225,13 @@ namespace Bunbarlang
                     this.ujjatekvalaszto = Console.ReadLine();
                 }
             } while (this.ujjatekvalaszto == "i");
-            if (this.penz <= 0)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("Vesztettél, nincs több pénzed a folytatáshoz!!");
-                Console.ResetColor();
-                Environment.Exit(0);
-            }
+            //if (this.penz <= 0)
+            //{
+            //    Console.ForegroundColor = ConsoleColor.DarkRed;
+            //    Console.WriteLine("Vesztettél, nincs több pénzed a folytatáshoz!!");
+            //    Console.ResetColor();
+            //    Environment.Exit(0);
+            //}
         }
 
         public void Kiiratas() {

@@ -11,6 +11,7 @@ namespace Bunbarlang
     {
         private int penz;
         private int tet;
+        private string ujjatekvalaszto;
         private Pakli pakli = new Pakli(new List<Kartya>());
         List<Kartya> jatekosKartyak = new List<Kartya>();
         List<Kartya> osztoKartyak = new List<Kartya>();
@@ -19,28 +20,58 @@ namespace Bunbarlang
         {
             this.penz = penz;
             this.tet = tet;
+            this.ujjatekvalaszto = ujjatekvalaszto;
+
         }
 
         public int Penz { get => penz; set => penz = value; }
         public int Tet { get => tet; set => tet = value; }
         public Pakli Pakli { get => pakli; set => pakli = value; }
+        public string Ujjatekvalaszto { get => ujjatekvalaszto; set => ujjatekvalaszto = value; }
 
         public void Jatek()
-        {
-            Console.WriteLine("BlackJack játék kezdődik!\n");
-            pakli.Feltoltes();
-            jatekosKartyak.Add(pakli.Huzas());
-            osztoKartyak.Add(pakli.Huzas());
-            jatekosKartyak.Add(pakli.Huzas());
-            osztoKartyak.Add(pakli.Huzas());
-            Console.WriteLine("Játékos kártyái:\n");
-            foreach (var kartya in jatekosKartyak)
+        {   do
             {
-                Console.WriteLine(kartya);
+                do
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine($"Jelenlegi pénzed: {this.penz}");
+                    Console.ResetColor();
+                    Console.Write("Mennyi tétet szeretnél feltenni: ");
+                    this.tet = Convert.ToInt32(Console.ReadLine());
+                } while (this.tet <= 0 || this.tet > this.penz);
+                this.ujjatekvalaszto = "";
+                pakli.Feltoltes();
+                jatekosKartyak.Add(pakli.Huzas());
+                osztoKartyak.Add(pakli.Huzas());
+                jatekosKartyak.Add(pakli.Huzas());
+                osztoKartyak.Add(pakli.Huzas());
+                Console.WriteLine("Játékos kártyái:\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                foreach (var kartya in jatekosKartyak)
+                {
+                    Console.WriteLine(kartya);
+                }
+                Console.ResetColor();
+                Console.WriteLine("\nOszto kártyái:\n");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(osztoKartyak[0] + "\n?");
+                Console.ResetColor();
+                Console.WriteLine(Kor());
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Szeretnél új játékot kezdeni? (i/n)"); 
+                Console.ResetColor();
+                this.ujjatekvalaszto = Console.ReadLine(); 
+                jatekosKartyak.Clear(); 
+                osztoKartyak.Clear();
+
+            } while (this.ujjatekvalaszto == "i" && this.penz>0);
+            if (this.penz <= 0 || this.ujjatekvalaszto == "i") 
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Nincs több pénzed, nem tudsz játszani!"); 
+                Console.ResetColor();
             }
-            Console.WriteLine("\nOszto kártyái:\n");
-            Console.WriteLine(osztoKartyak[0]+"\n?");
-            Console.WriteLine(Kor());
         }
 
         public string Kor()
@@ -67,27 +98,31 @@ namespace Bunbarlang
                 }
             }
 
-            Kiiratas(Ossz, OsztoOssz);
+            //Kiiratas(Ossz, OsztoOssz);
 
             if (Ossz == 21)
             {
                 if (OsztoOssz == 21)
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     return "Döntetlen!";
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     penz += tet * 2;
                     return "Nyertél BlackJack-kel!";             
                 }
             }
             else if (Ossz > 21)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 penz -= tet;
                 return "Vesztettél!";    
             }
             else if (OsztoOssz > 21)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 penz += 2*tet;
                 return "Nyertél, az osztó túllépte a 21-et!";   
             }
@@ -105,8 +140,9 @@ namespace Bunbarlang
                 
                 if (Ossz > 21)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     penz -= tet;
-                    Kiiratas(Ossz, OsztoOssz);
+                    //Kiiratas(Ossz, OsztoOssz);
                     return "Vesztettél!";
                 }
                 else if (OsztoOssz < 17)
@@ -135,35 +171,42 @@ namespace Bunbarlang
                 Kiiratas(Ossz, OsztoOssz);
                 if (OsztoOssz > 21)
                 {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     penz += 2 * tet;
                     return "Nyertél, az osztó túllépte a 21-et!";
                 }
                 else if (OsztoOssz > Ossz)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     penz -= tet;
                     return "Vesztettél!";
                 }
                 else if (OsztoOssz < Ossz)
                 {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     penz += 2 * tet;
                     return "Nyertél!";
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     return "Döntetlen!";
                 }
             }
-            
             Console.WriteLine("A játékos lapjai:\n");
+            Console.ForegroundColor = ConsoleColor.Green;
             foreach (var kartya in jatekosKartyak)
             {
                 Console.WriteLine(kartya);
             }
+            Console.ResetColor();
             Console.WriteLine("\nAz osztó lapjai:\n");
+            Console.ForegroundColor = ConsoleColor.Red;
             foreach (var kartya in osztoKartyak)
             {
                 Console.WriteLine(kartya);
             }
+            Console.ResetColor();
 
             return Kor();
         }
