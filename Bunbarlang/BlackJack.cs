@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -72,11 +73,21 @@ namespace Bunbarlang
                 osztoKartyak.Clear();
 
             } while (this.ujjatekvalaszto == "i" && this.penz>0);
-            if (this.penz <= 0 || this.ujjatekvalaszto == "i") 
+            if (this.penz <= 0) 
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("Nincs több pénzed, nem tudsz játszani!"); 
                 Console.ResetColor();
+                Thread.Sleep(2000);
+                Program.menü();
+            }
+            else 
+            { 
+                Console.ForegroundColor = ConsoleColor.Cyan; 
+                Console.WriteLine("Köszönöm, hogy játszottál!"); 
+                Console.ResetColor(); 
+                Thread.Sleep(2000);
+                Program.menü(); 
             }
         }
 

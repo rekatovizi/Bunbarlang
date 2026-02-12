@@ -53,8 +53,9 @@ namespace Bunbarlang
                     Console.WriteLine("Versenyző lovak");
                     foreach (var item in lovakok) 
                     { 
-                        Console.Write($"{item.Nev}, "); 
+                        Console.Write($"{item.Nev}  "); 
                     }
+                    Console.WriteLine();
                     this.ujjatekvalaszto = "";
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     Console.WriteLine($"Jelenlegi pénzed: {this.penz}");
@@ -111,6 +112,22 @@ namespace Bunbarlang
                 this.fogadas = "";
                 this.tet = 0;
             } while (this.ujjatekvalaszto == "i" && this.penz > 0);
+            if (this.penz <= 0)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Nincs több pénzed, nem tudsz játszani!");
+                Console.ResetColor();
+                Thread.Sleep(2000);
+                Program.menü();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Köszönöm, hogy játszottál!");
+                Console.ResetColor();
+                Thread.Sleep(2000);
+                Program.menü();
+            }
         }
 
         public override string ToString()

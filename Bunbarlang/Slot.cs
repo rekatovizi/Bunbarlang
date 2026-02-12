@@ -130,31 +130,33 @@ namespace Bunbarlang
                     this.penz -= 2 * this.tet;
                 }
                 this.tet = 0;
-                if (this.penz <= 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Vesztettél, nincs több pénzed a folytatáshoz!!");
-                    Console.ResetColor();
-                    Environment.Exit(0);
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"Jelenlegi pénzed: {this.penz}");
-                    Console.ResetColor();
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write("Szeretnél új játékot indtani(i/n): ");
-                    Console.ResetColor();
-                    this.ujjatekvalaszto = Console.ReadLine();
-                }
-            } while (this.ujjatekvalaszto == "i");
-            //if (this.penz <= 0)
-            //{
-            //    Console.ForegroundColor = ConsoleColor.DarkRed;
-            //    Console.WriteLine("Vesztettél, nincs több pénzed a folytatáshoz!!");
-            //    Console.ResetColor();
-            //    Environment.Exit(0);
-            //}
+
+                
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Jelenlegi pénzed: {this.penz}");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write("Szeretnél új játékot indtani(i/n): ");
+                Console.ResetColor();
+                this.ujjatekvalaszto = Console.ReadLine();
+                
+            } while (this.ujjatekvalaszto == "i" && this.penz > 0);
+            if (this.penz <= 0 )
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Nincs több pénzed, nem tudsz játszani!");
+                Console.ResetColor();
+                Thread.Sleep(2000);
+                Program.menü();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Köszönöm, hogy játszottál!");
+                Console.ResetColor();
+                Thread.Sleep(2000);
+                Program.menü();
+            }
         }
 
         public void Kiiratas() {
